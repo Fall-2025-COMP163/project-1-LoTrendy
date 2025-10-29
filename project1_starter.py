@@ -8,7 +8,7 @@
 character_name = "ChrisT"
 level = 1
 class_choice = 3
-def character_create(character_name, level, class_choice):
+def create_character(character_name, level, class_choice):
     if class_choice == 1:
         character_class = "Warrior"
         strength = 16
