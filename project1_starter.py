@@ -4,6 +4,9 @@
 # I used ChatGPT to help me clean up def save_character function/file to match the required format.
 
 # === CHARACTER CREATION FUNCTION ===
+character_name = "ChrisT"
+level = 1
+class_choice = 2
 def character_create(character_name, level, class_choice):
     if class_choice == 1:
         character_class = "Warrior"
@@ -80,9 +83,7 @@ def load_character():
 
 
 
-character_name = "ChrisT"
-level = 1
-class_choice = 2
+
 
 starter_stats = create_character(character_name, level, class_choice)
 
