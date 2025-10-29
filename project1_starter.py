@@ -1,5 +1,5 @@
 print("=======CHARACTER CREATION=======")
-character_name = "ChrisT"
+character_name = ChrisT
 level = 1
 xp = 0
 print("Level: ", level)
@@ -12,7 +12,7 @@ def character_create(character_name, level):
     print("3. Rogue: Medium Strength, Medium Magic, medium health. Special: FRENZY (50% Crit Chance on attacks for a short duration)")
     print("4. Cleric: Medium Strength, High Magic, High Health. Special: MR. Pots (Activates 3 random buffs for a short duration)")
     print()
-    character_class = int(input("Choose a class for your character: "))
+    character_class = int(input())
     if character_class == 1:
         character_class = "Warrior"
         strength = 16
