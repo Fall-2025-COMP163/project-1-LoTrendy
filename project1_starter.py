@@ -35,9 +35,21 @@ def character_create(character_name, level, class_choice):
     xp = 0
     return [character_class, strength, magic, health, gold, xp]
 
+def calculate_stats(starter_stats, level, xp_gain_amount):
+    """
+    Calculates new stats after gaining XP.
+    Returns updated starter_stats list and level.
+    """
+    starter_stats[5] += xp_gain_amount
+    if starter_stats[5] >= 100:
+        starter_stats[5] -= 100
+        level += 1
+        starter_stats[1] += 4   
+        starter_stats[2] += 3   
+        starter_stats[3] += 15  
+        starter_stats[4] += 35 * level  
+    return starter_stats, level
 
-
-# === SAVE CHARACTER FUNCTION ===
 def save_character(character_name, level, starter_stats):
     try:
         with open("character_save1.txt", "w") as f:
@@ -54,7 +66,6 @@ def save_character(character_name, level, starter_stats):
         return False
 
 
-# === LOAD CHARACTER FUNCTION ===
 def load_character():
     try:
         with open("character_save1.txt", "r") as f:
@@ -68,7 +79,6 @@ def load_character():
         return None
 
 
-# === ONLY RUN BELOW WHEN EXECUTED DIRECTLY, NOT WHEN IMPORTED ===
 
 character_name = "ChrisT"
 level = 1
