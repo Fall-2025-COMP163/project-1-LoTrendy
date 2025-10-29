@@ -36,18 +36,6 @@ def character_create(character_name, level, class_choice):
     return [character_class, strength, magic, health, gold, xp]
 
 
-# === XP GAIN FUNCTION ===
-def xp_gain(starter_stats, level, amount):
-    starter_stats[5] += amount
-    if starter_stats[5] >= 100:
-        starter_stats[5] -= 100
-        level += 1
-        starter_stats[1] += 4
-        starter_stats[2] += 3
-        starter_stats[3] += 15
-        starter_stats[4] += (35 * level)
-    return starter_stats, level
-
 
 # === SAVE CHARACTER FUNCTION ===
 def save_character(character_name, level, starter_stats):
@@ -86,7 +74,7 @@ character_name = "ChrisT"
 level = 1
 class_choice = 2
 
-starter_stats = character_create(character_name, level, class_choice)
+starter_stats = create_character(character_name, level, class_choice)
 
 save_success = save_character(character_name, level, starter_stats)
 
