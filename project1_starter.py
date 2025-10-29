@@ -113,7 +113,7 @@ Example: AI helped with file I/O error handling logic in save_character function
     """
     # TODO: Implement this function
     # Remember to use calculate_stats() function for stat calculation
-    pass
+   # pass
 
 # def calculate_stats(character_class, level):
     """
@@ -128,8 +128,8 @@ Example: AI helped with file I/O error handling logic in save_character function
     """
     # TODO: Implement this function
     # Return a tuple: (strength, magic, health)
-    pass
-
+   # pass
+#
 # def save_character(character, filename):
     """
     Saves character to text file in specific format
@@ -146,7 +146,7 @@ Example: AI helped with file I/O error handling logic in save_character function
     """
     # TODO: Implement this function
     # Remember to handle file errors gracefully
-    pass
+ #   pass
 
 # def load_character(filename):
     """
@@ -155,7 +155,7 @@ Example: AI helped with file I/O error handling logic in save_character function
     """
     # TODO: Implement this function
     # Remember to handle file not found errors
-    pass
+    #pass
 
 # def display_character(character):
     """
@@ -187,8 +187,8 @@ Example: AI helped with file I/O error handling logic in save_character function
 
 # Main program area (optional - for testing your functions)
 # if __name__ == "__main__":
-    print("=== CHARACTER CREATOR ===")
-    print("Test your functions here!")
+    #print("=== CHARACTER CREATOR ===")
+    #print("Test your functions here!")
     
     # Example usage:
     # char = create_character("TestHero", "Warrior")
