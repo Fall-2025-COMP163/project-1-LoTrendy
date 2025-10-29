@@ -1,27 +1,10 @@
-#COMP 163 - Project 1: Character Creator & Saving/Loading
-#Name: Christopher Taylor
-#Date: 10/27/25
-#I used ChatGPT to help me clean up def save_creator function/file to match the required format.
 # COMP 163 - Project 1: Character Creator & Saving/Loading
 # Name: Christopher Taylor
 # Date: 10/27/25
 # I used ChatGPT to help me clean up def save_character function/file to match the required format.
 
-# --- PRESET CHARACTER VALUES (no input needed) ---
-character_name = "ChrisT"
-level = 1
-xp = 0
-character_class_choice = 2  # 1 = Warrior, 2 = Mage, 3 = Rogue, 4 = Cleric
-
-print("Character Name:", character_name)
-print("Level:", level)
-print()
-
 # === CHARACTER CREATION FUNCTION ===
 def character_create(character_name, level, class_choice):
-    print("Creating character with preset values...")
-    print()
-
     if class_choice == 1:
         character_class = "Warrior"
         strength = 16
@@ -43,7 +26,6 @@ def character_create(character_name, level, class_choice):
         magic = 30
         health = 100
     else:
-        print("Invalid choice! Defaulting to Rogue.")
         character_class = "Rogue"
         strength = 10
         magic = 10
@@ -54,44 +36,21 @@ def character_create(character_name, level, class_choice):
     return [character_class, strength, magic, health, gold, xp]
 
 
-# Create starter stats using preset values
-starter_stats = character_create(character_name, level, character_class_choice)
-
-# Display starter info
-print(f"Your character is {character_name} the {starter_stats[0]}")
-print()
-print("Starter Stats:")
-print(f"Strength: {starter_stats[1]}")
-print(f"Magic: {starter_stats[2]}")
-print(f"Health: {starter_stats[3]}")
-print(f"Gold: {starter_stats[4]}")
-print(f"XP: {starter_stats[5]}")
-print()
-
-
 # === XP GAIN FUNCTION ===
-def xp_gain(amount):
-    global level
+def xp_gain(starter_stats, level, amount):
     starter_stats[5] += amount
-    print(f"You gained {amount} XP!")
-
     if starter_stats[5] >= 100:
-        print("Congratulations, you gained 1 level!")
         starter_stats[5] -= 100
         level += 1
         starter_stats[1] += 4
         starter_stats[2] += 3
         starter_stats[3] += 15
         starter_stats[4] += (35 * level)
-    return starter_stats
+    return starter_stats, level
 
 
 # === SAVE CHARACTER FUNCTION ===
 def save_character(character_name, level, starter_stats):
-    """
-    Saves character data to a text file in the required format.
-    Returns True if successful, False if an error occurs.
-    """
     try:
         with open("character_save1.txt", "w") as f:
             f.write(f"Character Name: {character_name}\n")
@@ -102,16 +61,9 @@ def save_character(character_name, level, starter_stats):
             f.write(f"Health: {starter_stats[3]}\n")
             f.write(f"Gold: {starter_stats[4]}\n")
             f.write(f"XP: {starter_stats[5]}\n")
-        print("Character saved successfully!")
         return True
-    except Exception as e:
-        print("Trouble with save:", e)
+    except Exception:
         return False
-
-
-# Save the character automatically
-save_character(character_name, level, starter_stats)
-print()
 
 
 # === LOAD CHARACTER FUNCTION ===
@@ -119,27 +71,31 @@ def load_character():
     try:
         with open("character_save1.txt", "r") as f:
             lines = f.readlines()
-
-        # Clean up the data and extract stats
         loaded_stats = {}
         for line in lines:
             key, value = line.strip().split(": ")
             loaded_stats[key] = value
-
-        print("Character loaded successfully!")
         return loaded_stats
-    except Exception as e:
-        print("Error loading character:", e)
+    except Exception:
         return None
 
 
-# Automatically load and print character
-loaded_data = load_character()
-print()
-if loaded_data:
-    print("Loaded Character:")
-    for key, value in loaded_data.items():
-        print(f"{key}: {value}")
+# === ONLY RUN BELOW WHEN EXECUTED DIRECTLY, NOT WHEN IMPORTED ===
+if __name__ == "__main__":
+    print("======= CHARACTER CREATION =======")
+    character_name = "ChrisT"
+    level = 1
+    class_choice = 2
+
+    starter_stats = character_create(character_name, level, class_choice)
+    print(f"Your character is {character_name} the {starter_stats[0]}")
+    print("Starter Stats:", starter_stats)
+
+    save_success = save_character(character_name, level, starter_stats)
+    print("Save successful:", save_success)
+
+    loaded_data = load_character()
+    print("Loaded data:", loaded_data)
 
 
 
