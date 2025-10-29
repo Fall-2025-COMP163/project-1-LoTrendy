@@ -2,8 +2,7 @@
 #Name: Christopher Taylor
 #Date: 10/27/25
 #I used ChatGPT to help me clean up def save_creator function/file to match the required format.
-print("=======CHARACTER CREATION=======")
-character_name = input("Choose a name for your character: ")
+character_name = ChrisT
 level = 1
 xp = 0
 print("Level: ", level)
@@ -16,7 +15,7 @@ def character_create(character_name, level):
     print("3. Rogue: Medium Strength, Medium Magic, medium health. Special: FRENZY (50% Crit Chance on attacks for a short duration)")
     print("4. Cleric: Medium Strength, High Magic, High Health. Special: MR. Pots (Activates 3 random buffs for a short duration)")
     print()
-    character_class = int(input("Choose a class for your character: "))
+    character_class == 3
     if character_class == 1:
         character_class = "Warrior"
         strength = 16
@@ -116,7 +115,7 @@ AI Usage: [Document any AI assistance used]
 Example: AI helped with file I/O error handling logic in save_character function
 """
 
-def create_character(name, character_class):
+# def create_character(name, character_class):
     """
     Creates a new character dictionary with calculated stats
     Returns: dictionary with keys: name, class, level, strength, magic, health, gold
@@ -129,7 +128,7 @@ def create_character(name, character_class):
     # Remember to use calculate_stats() function for stat calculation
     pass
 
-def calculate_stats(character_class, level):
+# def calculate_stats(character_class, level):
     """
     Calculates base stats based on class and level
     Returns: tuple of (strength, magic, health)
@@ -144,7 +143,7 @@ def calculate_stats(character_class, level):
     # Return a tuple: (strength, magic, health)
     pass
 
-def save_character(character, filename):
+# def save_character(character, filename):
     """
     Saves character to text file in specific format
     Returns: True if successful, False if error occurred
@@ -162,7 +161,7 @@ def save_character(character, filename):
     # Remember to handle file errors gracefully
     pass
 
-def load_character(filename):
+# def load_character(filename):
     """
     Loads character from text file
     Returns: character dictionary if successful, None if file not found
@@ -171,7 +170,7 @@ def load_character(filename):
     # Remember to handle file not found errors
     pass
 
-def display_character(character):
+# def display_character(character):
     """
     Prints formatted character sheet
     Returns: None (prints to console)
@@ -187,9 +186,9 @@ def display_character(character):
     Gold: 100
     """
     # TODO: Implement this function
-    pass
+    # pass
 
-def level_up(character):
+# def level_up(character):
     """
     Increases character level and recalculates stats
     Modifies the character dictionary directly
@@ -197,10 +196,10 @@ def level_up(character):
     """
     # TODO: Implement this function
     # Remember to recalculate stats for the new level
-    pass
+    # pass
 
 # Main program area (optional - for testing your functions)
-if __name__ == "__main__":
+# if __name__ == "__main__":
     print("=== CHARACTER CREATOR ===")
     print("Test your functions here!")
     
