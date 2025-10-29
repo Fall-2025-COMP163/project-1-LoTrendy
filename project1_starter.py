@@ -1,5 +1,5 @@
 print("=======CHARACTER CREATION=======")
-character_name = input("Please name your Character:")
+character_name = "ChrisT"
 level = 1
 xp = 0
 print("Level: ", level)
