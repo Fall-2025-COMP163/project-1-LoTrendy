@@ -81,21 +81,16 @@ def load_character():
 
 
 # === ONLY RUN BELOW WHEN EXECUTED DIRECTLY, NOT WHEN IMPORTED ===
-if __name__ == "__main__":
-    print("======= CHARACTER CREATION =======")
-    character_name = "ChrisT"
-    level = 1
-    class_choice = 2
 
-    starter_stats = character_create(character_name, level, class_choice)
-    print(f"Your character is {character_name} the {starter_stats[0]}")
-    print("Starter Stats:", starter_stats)
+character_name = "ChrisT"
+level = 1
+class_choice = 2
 
-    save_success = save_character(character_name, level, starter_stats)
-    print("Save successful:", save_success)
+starter_stats = character_create(character_name, level, class_choice)
 
-    loaded_data = load_character()
-    print("Loaded data:", loaded_data)
+save_success = save_character(character_name, level, starter_stats)
+
+loaded_data = load_character()
 
 
 
