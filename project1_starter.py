@@ -6,6 +6,7 @@
 
 # === CHARACTER CREATION FUNCTION ===
 # ChrisT Project 1.py
+# ChrisT Project 1.py
 import os
 lvl = 1
 
@@ -146,20 +147,6 @@ def level_up(character):
     print(character["name"], "leveled up to Level", character["level"])
     return None
 
-
-# === MAIN TEST AREA ===
 if __name__ == "__main__":
     print("=== CHARACTER CREATOR ===")
-    name = input("Enter character name: ")
-    char_class = input("Enter class (Warrior/Mage/Rogue/Cleric): ")
-
-    player = create_character(name, char_class)
-    display_character(player)
-
-    xp_gain(player, 120)
-    save_character(player, "character_save1.txt")
-
-    loaded = load_character("character_save1.txt")
-    if loaded:
-        display_character(loaded)
-
+    print("Test your functions here!")
