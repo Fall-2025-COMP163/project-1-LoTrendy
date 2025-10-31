@@ -5,127 +5,161 @@
 # I used ChatGPT to help me clean up def save_character function/file to match the required format.
 
 # === CHARACTER CREATION FUNCTION ===
-print("=======CHARACTER CREATION=======")
-character_name = "ChrisT"
-level = 1
-xp = 0
-print()
-print("Name:", character_name)
-print("Level:", level)
-print()
+# ChrisT Project 1.py
+import os
+lvl = 1
 
-def character_create(character_name, level):
-    print("Select your class: ")
-    print()
-    print("1. Warrior: Very Strong, Very Low Magic, and High Health. Special: TANK (Take no damage for a short duration) ")
-    print("2. Mage: Very Weak, Large amounts of Offensive Magic, Medium Health. Special: BLITZ (Unlimited Mana for a short duration) ")
-    print("3. Rogue: Medium Strength, Medium Magic, medium health. Special: FRENZY (50% Crit Chance on attacks for a short duration)")
-    print("4. Cleric: Medium Strength, High Magic, High Health. Special: MR. Pots (Activates 3 random buffs for a short duration)")
-    print()
-    character_class = 3
-    if character_class == 1:
-        character_class = "Warrior"
-        strength = 16
-        magic = 3
-        health = 110
-    elif character_class == 2:
-        character_class = "Mage"
-        strength = 4
-        magic = 26
-        health = 65
-    elif character_class == 3:
-        character_class = "Rogue"
-        strength = 10
-        magic = 10
-        health = 75
-    elif character_class == 4:
-        character_class = "Cleric"
-        strength = 8
-        magic = 30
-        health = 100
+def create_character(name, character_class):
+    """Creates a new character dictionary with base stats and special ability"""
+    global lvl
+    lvl = 1
+
+    if character_class in ["Warrior", "Mage", "Rogue", "Cleric"]:
+        stats = calculate_stats(character_class)
+        char_dict = {
+            "name": name,
+            "class": character_class,
+            "level": lvl,
+            "strength": stats[0],
+            "magic": stats[1],
+            "health": stats[2],
+            "gold": 150,
+            "xp": 0,
+            "special": stats[3]
+        }
+        return char_dict
     else:
         print("Invalid choice! Defaulting to Rogue.")
-        character_class = "Rogue"
-        strength = 10
-        magic = 10
-        health = 75
-    gold = 150
-    xp = 0
-    return [character_class, strength, magic, health, gold, xp]
+        stats = calculate_stats("Rogue")
+        char_dict = {
+            "name": name,
+            "class": "Rogue",
+            "level": lvl,
+            "strength": stats[0],
+            "magic": stats[1],
+            "health": stats[2],
+            "gold": 150,
+            "xp": 0,
+            "special": stats[3]
+        }
+        return char_dict
 
-base_stats = character_create({character_name}, 1)
-print()
-print(f"Your Character is", character_name, "the", base_stats[0])
-print()
-print("Starter Stats: ")
-print(f"Strength:", base_stats[1])
-print(f"Magic:", base_stats[2])
-print(f"Health:", base_stats[3])
-print(f"Gold:", base_stats[4])
-print(f"XP:", base_stats[5])
-print()
-def xp_gain(character_name, amount):
-    base_stats[5] += amount
-    print("You gained {amount} XP!")
-    if base_stats[5] >= 100:
-        print("Congratulations, You gained 1 level")
-        base_stats[5] -= 100
-        level += 1
-        base_stats[1] += 4
-        base_stats[2] += 3
-        base_stats[3] += 15
-        base_stats[4] += ( 35 * level)
-        return starter_stats
 
-def save_character(character_name, level, base_stats):
-    file = open("character_save1.txt", "w")
-    file.write("Character Name: " + character_name + "\n")
-    file.write("Class: " + base_stats[0] + "\n")
-    file.write("Level: " + str(level) + "\n")
-    file.write("Strength: " + str(base_stats[1]) + "\n")
-    file.write("Magic: " + str(base_stats[2]) + "\n")
-    file.write("Health: " + str(base_stats[3]) + "\n")
-    file.write("Gold: " + str(base_stats[4]) + "\n")
-    file.write("XP: " + str(base_stats[5]) + "\n")
+def calculate_stats(character_class):
+    """Assigns base stats and special ability based on class"""
+    if character_class == "Warrior":
+        return 16, 3, 110, "TANK"
+    elif character_class == "Mage":
+        return 4, 26, 65, "BLITZ"
+    elif character_class == "Rogue":
+        return 10, 10, 75, "FRENZY"
+    elif character_class == "Cleric":
+        return 8, 30, 100, "MR. POTS"
+    else:
+        return 10, 10, 75, "FRENZY"
+
+
+def xp_gain(character, amount):
+    """Adds XP and levels up if XP >= 100"""
+    character["xp"] += amount
+    print("You gained", amount, "XP!")
+
+    if character["xp"] >= 100:
+        print("Congratulations, you gained 1 level!")
+        character["xp"] -= 100
+        character["level"] += 1
+        character["strength"] += 4
+        character["magic"] += 3
+        character["health"] += 15
+        character["gold"] += (35 * character["level"])
+    return character
+
+
+def save_character(character, filename):
+    """Saves character data to text file"""
+    if "/" in filename:
+        return False
+    file = open(filename, "w")
+    file.write("Character Name: " + character["name"] + "\n")
+    file.write("Class: " + character["class"] + "\n")
+    file.write("Level: " + str(character["level"]) + "\n")
+    file.write("Strength: " + str(character["strength"]) + "\n")
+    file.write("Magic: " + str(character["magic"]) + "\n")
+    file.write("Health: " + str(character["health"]) + "\n")
+    file.write("Gold: " + str(character["gold"]) + "\n")
+    file.write("XP: " + str(character["xp"]) + "\n")
+    file.write("Special: " + character["special"] + "\n")
     file.close()
     print("Character saved successfully!")
-   
     return True
 
-save = save_character(character_name, level, base_stats)
-print()
 
-def load_character(character_name):
-    character_load = open("character_save1.txt","r")
-    lines = character_load.readlines()
-    character_load.close()
-    return base_stats
+def load_character(filename):
+    """Loads character from text file if it exists"""
+    if os.path.isfile(filename):
+        file = open(filename, "r")
+        lines = file.readlines()
+        file.close()
 
-base_stats = load_character(character_name)
-print("Loaded Character")
-print()
-print(character_name)
-print("level:", level)
-print("Class:", base_stats[0])
-print("Strength:", base_stats[1])
-print("Magic:", base_stats[2])
-print("Health:", base_stats[3])
-print("Gold:", base_stats[4])
-print("XP:", base_stats[5])
-print()
+        char_dict = {
+            "name": lines[0].split(":")[1].strip(),
+            "class": lines[1].split(":")[1].strip(),
+            "level": int(lines[2].split(":")[1].strip()),
+            "strength": int(lines[3].split(":")[1].strip()),
+            "magic": int(lines[4].split(":")[1].strip()),
+            "health": int(lines[5].split(":")[1].strip()),
+            "gold": int(lines[6].split(":")[1].strip()),
+            "xp": int(lines[7].split(":")[1].strip()),
+            "special": lines[8].split(":")[1].strip()
+        }
+        print("Character loaded successfully!")
+        return char_dict
+    else:
+        print("Save file not found.")
+        return None
 
-def display_character(base_stats):
-    print("Character Display")
-    print(character_name)
-    print("level:", level)
-    print("Class:", base_stats[0])
-    print("Strength:", base_stats[1])
-    print("Magic:", base_stats[2])
-    print("Health:", base_stats[3])
-    print("Gold:", base_stats[4])
-    print("XP:", base_stats[5])
-    return base_stats
 
-display = display_character(base_stats)
-print("Current Chacter and Stats")
-print(display)
+def display_character(character):
+    """Displays formatted character stats"""
+    print("=== CHARACTER SHEET ===")
+    print("Name:", character["name"])
+    print("Class:", character["class"])
+    print("Level:", character["level"])
+    print("Strength:", character["strength"])
+    print("Magic:", character["magic"])
+    print("Health:", character["health"])
+    print("Gold:", character["gold"])
+    print("XP:", character["xp"])
+    print("Special:", character["special"])
+    print()
+    return None
+
+
+def level_up(character):
+    """Manually level up the character"""
+    global lvl
+    lvl += 1
+    character["level"] = lvl
+    character["strength"] += 4
+    character["magic"] += 3
+    character["health"] += 15
+    print(character["name"], "leveled up to Level", character["level"])
+    return None
+
+
+# === MAIN TEST AREA ===
+if __name__ == "__main__":
+    print("=== CHARACTER CREATOR ===")
+    name = input("Enter character name: ")
+    char_class = input("Enter class (Warrior/Mage/Rogue/Cleric): ")
+
+    player = create_character(name, char_class)
+    display_character(player)
+
+    xp_gain(player, 120)
+    save_character(player, "character_save1.txt")
+
+    loaded = load_character("character_save1.txt")
+    if loaded:
+        display_character(loaded)
+
