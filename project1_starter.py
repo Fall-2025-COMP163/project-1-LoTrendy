@@ -46,7 +46,7 @@ def create_character(name, character_class):
         return char_dict
 
 
-def calculate_stats(character_class):
+def calculate_stats(character_class, lvl):
     """Assigns base stats and special ability based on class"""
     if character_class == "Warrior":
         return 16, 3, 110, "TANK"
