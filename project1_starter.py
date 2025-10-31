@@ -7,6 +7,7 @@
 # === CHARACTER CREATION FUNCTION ===
 # ChrisT Project 1.py
 # ChrisT Project 1.py
+# ChrisT Project 1.py
 import os
 lvl = 1
 
@@ -16,7 +17,7 @@ def create_character(name, character_class):
     lvl = 1
 
     if character_class in ["Warrior", "Mage", "Rogue", "Cleric"]:
-        stats = calculate_stats(character_class)
+        stats = calculate_stats(character_class, lvl)
         char_dict = {
             "name": name,
             "class": character_class,
@@ -31,7 +32,7 @@ def create_character(name, character_class):
         return char_dict
     else:
         print("Invalid choice! Defaulting to Rogue.")
-        stats = calculate_stats("Rogue")
+        stats = calculate_stats("Rogue", lvl)
         char_dict = {
             "name": name,
             "class": "Rogue",
@@ -146,6 +147,7 @@ def level_up(character):
     character["health"] += 15
     print(character["name"], "leveled up to Level", character["level"])
     return None
+
 
 if __name__ == "__main__":
     print("=== CHARACTER CREATOR ===")
