@@ -8,6 +8,7 @@
 # ChrisT Project 1.py
 # ChrisT Project 1.py
 # ChrisT Project 1.py
+# ChrisT Project 1.py
 import os
 lvl = 1
 
@@ -18,47 +19,54 @@ def create_character(name, character_class):
 
     if character_class in ["Warrior", "Mage", "Rogue", "Cleric"]:
         stats = calculate_stats(character_class, lvl)
-        char_dict = {
-            "name": name,
-            "class": character_class,
-            "level": lvl,
-            "strength": stats[0],
-            "magic": stats[1],
-            "health": stats[2],
-            "gold": 150,
-            "xp": 0,
-            "special": stats[3]
-        }
-        return char_dict
+        special = assign_special(character_class)
     else:
         print("Invalid choice! Defaulting to Rogue.")
-        stats = calculate_stats("Rogue", lvl)
-        char_dict = {
-            "name": name,
-            "class": "Rogue",
-            "level": lvl,
-            "strength": stats[0],
-            "magic": stats[1],
-            "health": stats[2],
-            "gold": 150,
-            "xp": 0,
-            "special": stats[3]
-        }
-        return char_dict
+        character_class = "Rogue"
+        stats = calculate_stats(character_class, lvl)
+        special = assign_special(character_class)
+
+    char_dict = {
+        "name": name,
+        "class": character_class,
+        "level": lvl,
+        "strength": stats[0],
+        "magic": stats[1],
+        "health": stats[2],
+        "gold": 150,
+        "xp": 0,
+        "special": special
+    }
+
+    return char_dict
 
 
 def calculate_stats(character_class, lvl):
-    """Assigns base stats and special ability based on class"""
+    """Assigns base stats based on class"""
     if character_class == "Warrior":
-        return 16, 3, 110, "TANK"
+        return 16, 3, 110
     elif character_class == "Mage":
-        return 4, 26, 65, "BLITZ"
+        return 4, 26, 65
     elif character_class == "Rogue":
-        return 10, 10, 75, "FRENZY"
+        return 10, 10, 75
     elif character_class == "Cleric":
-        return 8, 30, 100, "MR. POTS"
+        return 8, 30, 100
     else:
-        return 10, 10, 75, "FRENZY"
+        return 10, 10, 75
+
+
+def assign_special(character_class):
+    """Assigns special ability name based on class"""
+    if character_class == "Warrior":
+        return "TANK"
+    elif character_class == "Mage":
+        return "BLITZ"
+    elif character_class == "Rogue":
+        return "FRENZY"
+    elif character_class == "Cleric":
+        return "MR. POTS"
+    else:
+        return "FRENZY"
 
 
 def xp_gain(character, amount):
@@ -81,17 +89,19 @@ def save_character(character, filename):
     """Saves character data to text file"""
     if "/" in filename:
         return False
-    file = open(filename, "w")
-    file.write("Character Name: " + character["name"] + "\n")
-    file.write("Class: " + character["class"] + "\n")
-    file.write("Level: " + str(character["level"]) + "\n")
-    file.write("Strength: " + str(character["strength"]) + "\n")
-    file.write("Magic: " + str(character["magic"]) + "\n")
-    file.write("Health: " + str(character["health"]) + "\n")
-    file.write("Gold: " + str(character["gold"]) + "\n")
-    file.write("XP: " + str(character["xp"]) + "\n")
-    file.write("Special: " + character["special"] + "\n")
-    file.close()
+
+    f = open(filename, "w")
+    f.write("Character Name: " + character["name"] + "\n")
+    f.write("Class: " + character["class"] + "\n")
+    f.write("Level: " + str(character["level"]) + "\n")
+    f.write("Strength: " + str(character["strength"]) + "\n")
+    f.write("Magic: " + str(character["magic"]) + "\n")
+    f.write("Health: " + str(character["health"]) + "\n")
+    f.write("Gold: " + str(character["gold"]) + "\n")
+    f.write("XP: " + str(character["xp"]) + "\n")
+    f.write("Special: " + character["special"] + "\n")
+    f.close()
+
     print("Character saved successfully!")
     return True
 
@@ -99,9 +109,9 @@ def save_character(character, filename):
 def load_character(filename):
     """Loads character from text file if it exists"""
     if os.path.isfile(filename):
-        file = open(filename, "r")
-        lines = file.readlines()
-        file.close()
+        f = open(filename, "r")
+        lines = f.readlines()
+        f.close()
 
         char_dict = {
             "name": lines[0].split(":")[1].strip(),
