@@ -99,6 +99,8 @@ Implementation (70%): Function correctness, file operations, error handling
 Interview (30%): Code explanation and live coding challenge
 
 
+# MY PERSONAL DOCUMENTATION
+
 # Game concept
 
 My RPG world is built around a fantasy adventure where the player creates a neutral character, neither a hero or a villain who can be a Warrior, Mage, Rogue, or Cleric. As we code more I will work on allowing the character to make good choices or bad choices. Each class has unique stats that affect gameplay — Warriors are strong and durable, Mages are powerful spellcasters, Rogues are balanced and quick, and Clerics specialize in healing and support. The player gains XP through battles, levels up, and improves their abilities over time.
